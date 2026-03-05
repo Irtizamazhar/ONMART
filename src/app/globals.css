@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Design system: spacing, surface, typography ---- */
+:root {
+  --background: #f8fafc;
+  --foreground: #1e293b;
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --daraz-orange: #f57224;
+  --daraz-orange-dark: #e5611a;
+  --daraz-orange-light: #fff5f0;
+  --daraz-text: #1e293b;
+  --daraz-text-muted: #64748b;
+  --daraz-border: #e2e8f0;
+  --daraz-card: #ffffff;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.08);
+  --radius: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --transition: 200ms;
+  --transition-slow: 250ms;
+}
+
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  /* Safe area for notches (e.g. iPhone) */
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  width: 100%;
+  max-width: 100vw;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  overflow-x: hidden;
+  min-width: 0;
+  width: 100%;
+  max-width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .card-shadow {
+    box-shadow: var(--shadow);
+  }
+  .card-shadow-hover {
+    box-shadow: var(--shadow-lg);
+  }
+  /* Responsive container: prevent overflow on small screens */
+  .container-responsive {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Buttons: primary, secondary, focus-visible, active */
+.btn-primary {
+  @apply bg-[var(--daraz-orange)] hover:bg-[var(--daraz-orange-dark)] text-white font-semibold py-2.5 px-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--daraz-orange)] active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply bg-white text-[var(--daraz-orange)] border-2 border-[var(--daraz-orange)] font-semibold py-2.5 px-5 rounded-xl transition-all duration-200 ease-out hover:bg-[var(--daraz-orange-light)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--daraz-orange)] active:scale-[0.98];
+}
+
+/* Inputs: focus ring, error state placeholder */
+.input-field {
+  @apply border border-[var(--daraz-border)] rounded-xl px-4 py-3 text-[var(--daraz-text)] placeholder:text-[var(--daraz-text-muted)] focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-orange-500 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-orange-300 disabled:bg-slate-100 disabled:text-slate-500 disabled:cursor-not-allowed;
+}
+
+/* Section title */
+.section-title {
+  @apply text-xl font-bold text-[var(--daraz-text)] tracking-tight leading-tight;
+}
+
+/* Global focus-visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--daraz-orange);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--daraz-orange);
+  outline-offset: 2px;
+}
+
+/* Page load – fancy entrance (runs once when layout mounts) */
+@keyframes page-load-in {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.page-load-wrap {
+  animation: page-load-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Seller apply page: keep inputs dark when filled / autofill (no white background) */
+.seller-apply-page .seller-apply-input:-webkit-autofill,
+.seller-apply-page .seller-apply-input:-webkit-autofill:hover,
+.seller-apply-page .seller-apply-input:-webkit-autofill:focus,
+.seller-apply-page .seller-apply-input:-webkit-autofill:active {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.35) inset;
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.35) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Focus on seller apply inputs: white border/ring, not orange */
+.seller-apply-page .seller-apply-input:focus,
+.seller-apply-page .seller-apply-input:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}

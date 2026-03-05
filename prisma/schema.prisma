@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  phone        String?
+  isAdmin      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime? // kept for existing DB; not used in app
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime @default(now())
+  @@map("admin")
+}
+
+model OtpVerification {
+  id        String   @id @default(cuid())
+  phone     String
+  code      String   @map("codeHash")
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  attempts  Int?     @default(0) // kept for existing DB; not used in app
+  @@index([phone])
+  @@index([expiresAt])
+}
+
+model Category {
+  id               String   @id @default(cuid())
+  name             String
+  nameUr           String?  @map("name_ur")
+  nameZh           String?  @map("name_zh")
+  nameTranslations Json?    @map("name_translations")
+  slug             String   @unique
+  image            String   @default("")
+  createdAt        DateTime @default(now())
+}
+
+model Product {
+  id                 String   @id @default(cuid())
+  title              String
+  titleUr            String?  @map("title_ur")
+  titleZh            String?  @map("title_zh")
+  titleTranslations Json?    @map("title_translations")
+  price              Decimal  @db.Decimal(12, 2)
+  image              String   @default("")
+  images             String?
+  categorySlug       String
+  description        String?  @db.Text
+  sectionSlug        String?  @map("section_slug")
+  rating             Decimal? @db.Decimal(3, 2)
+  ratingCount        Int      @default(0)
+  soldCount          Int      @default(0) @map("sold_count")
+  inStock            Boolean  @default(true) @map("in_stock")
+  hidden             Boolean  @default(false) @map("hidden")
+  originalPrice      Decimal? @db.Decimal(12, 2) @map("original_price")
+  discountPercent    Int?     @map("discount_percent")
+  createdAt          DateTime @default(now())
+  reviews            ProductReview[]
+}
+
+model ProductReview {
+  id            String   @id @default(cuid())
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  author        String
+  reviewerEmail String?  @map("reviewer_email")
+  text          String   @db.Text
+  rating        Int
+  createdAt     DateTime @default(now())
+  @@index([productId])
+  @@index([productId, reviewerEmail])
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  src       String
+  href      String   @default("#")
+  label     String   @default("")
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id        String   @id @default(cuid())
+  email     String
+  name      String?
+  phone     String?
+  address   String?  @db.Text
+  city      String?
+  province  String?
+  area      String?
+  total     Decimal  @db.Decimal(12, 2)
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+  items     OrderItem[]
+}
+
+model OrderItem {
+  id         String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  title     String
+  price     Decimal @db.Decimal(12, 2)
+  quantity  Int
+  image     String  @default("")
+  @@index([orderId])
+}
+
+model DisabledCategorySlug {
+  slug String @id
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@index([email])
+  @@index([token])
+}

@@ -1,0 +1,174 @@
+{
+  "categories": [
+    {
+      "id": "cat-1771995910416-rni2bp",
+      "name": "productive",
+      "slug": "productivity",
+      "image": "/uploads/categories/1771995910392-vnugeh4.png"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-1771995949892-gz1g6k87",
+      "title": "product",
+      "price": 233,
+      "image": "/uploads/products/1771995949705-o7vf7jf.png",
+      "images": [
+        "/uploads/products/1771995949705-o7vf7jf.png",
+        "/uploads/products/1771995949723-hzjxgft.png",
+        "/uploads/products/1771995949864-1zxhbcw.png"
+      ],
+      "categorySlug": "productivity",
+      "description": "dweqeqew"
+    }
+  ],
+  "banners": [],
+  "disabledCategorySlugs": [],
+  "orders": [
+    {
+      "id": "ord-1771927051879-c01brlf",
+      "email": "admin@onmart.com",
+      "items": [
+        {
+          "id": 11,
+          "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+          "price": 109,
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png"
+        }
+      ],
+      "total": 109,
+      "status": "pending",
+      "createdAt": "2026-02-24T09:57:31.879Z"
+    },
+    {
+      "id": "ord-1771928252094-6263m6f",
+      "email": "admin@onmart.com",
+      "items": [
+        {
+          "id": 12,
+          "title": "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
+          "price": 114,
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_t.png"
+        }
+      ],
+      "total": 114,
+      "status": "cancelled",
+      "createdAt": "2026-02-24T10:17:32.095Z"
+    },
+    {
+      "id": "ord-1771996022241-m7tv2c7",
+      "email": "admin@onmart.com",
+      "items": [
+        {
+          "id": "prod-1771995949892-gz1g6k87",
+          "title": "product",
+          "price": 233,
+          "quantity": 1,
+          "image": "/uploads/products/1771995949705-o7vf7jf.png"
+        }
+      ],
+      "total": 233,
+      "status": "cancelled",
+      "createdAt": "2026-02-25T05:07:02.241Z"
+    },
+    {
+      "id": "ord-1771996616427-4j8gt5d",
+      "email": "admin@onmart.com",
+      "items": [
+        {
+          "id": 12,
+          "title": "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
+          "price": 114,
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_t.png"
+        }
+      ],
+      "total": 114,
+      "status": "cancelled",
+      "createdAt": "2026-02-25T05:16:56.427Z"
+    },
+    {
+      "id": "ord-1771996727715-eecxxb2",
+      "email": "admin@onmart.com",
+      "items": [
+        {
+          "id": 11,
+          "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+          "price": 109,
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_t.png"
+        }
+      ],
+      "total": 109,
+      "status": "cancelled",
+      "createdAt": "2026-02-25T05:18:47.715Z"
+    },
+    {
+      "id": "ord-1771998588600-pgb77bo",
+      "email": "admin@onmart.com",
+      "name": "Irtiza Mazhar Irtiza Mazhar",
+      "items": [
+        {
+          "id": "prod-1771995949892-gz1g6k87",
+          "title": "product",
+          "price": 233,
+          "quantity": 1,
+          "image": "/uploads/products/1771995949705-o7vf7jf.png"
+        }
+      ],
+      "total": 363,
+      "status": "cancelled",
+      "createdAt": "2026-02-25T05:49:48.600Z",
+      "phone": "03045357389",
+      "address": "Model town taxila, Model town taxila, dsa, Punjab, taxila, dssa",
+      "city": "taxila",
+      "province": "Punjab"
+    },
+    {
+      "id": "ord-1772000137337-cw67gkm",
+      "email": "heroeagle423@gmail.com",
+      "name": "Hero Eagle",
+      "items": [
+        {
+          "id": 18,
+          "title": "MBJ Women's Solid Short Sleeve Boat Neck V ",
+          "price": 9.85,
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_t.png"
+        }
+      ],
+      "total": 139.85,
+      "status": "packing",
+      "createdAt": "2026-02-25T06:15:37.337Z",
+      "phone": "dccd",
+      "address": "sdfds, fds, dfs, dfs, fds, fdsdfsfdfd",
+      "city": "dfs",
+      "province": "dfs",
+      "area": "fds"
+    },
+    {
+      "id": "ord-1772003965959-i61e7a7",
+      "email": "admin@onmart.com",
+      "name": "Irtiza Mazhar Irtiza Mazhar",
+      "items": [
+        {
+          "id": "prod-1771995949892-gz1g6k87",
+          "title": "product",
+          "price": 233,
+          "quantity": 1,
+          "image": "/uploads/products/1771995949705-o7vf7jf.png"
+        }
+      ],
+      "total": 363,
+      "status": "packing",
+      "createdAt": "2026-02-25T07:19:25.959Z",
+      "phone": "03045357389",
+      "address": "Model town taxila, Model town taxila, iuwe, ewe, taxila, ew, e76w890",
+      "city": "taxila",
+      "province": "ewe",
+      "area": "ew"
+    }
+  ]
+}
