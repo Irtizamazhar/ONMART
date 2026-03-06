@@ -64,7 +64,7 @@ export async function sendOtpToPhone(phone: string): Promise<{ success: boolean;
         return { success: true, sentViaSms: true };
       } catch (twilioErr) {
         if (process.env.NODE_ENV !== "production") {
-          console.warn(`${DEV_OTP_LOG_PREFIX} Twilio failed, falling back to DEV OTP:`, twilioErr instanceof Error ? twilioErr.message : twilioErr);
+          console.warn(`${DEV_OTP_LOG_PREFIX} Twilio failed, falling back to terminal OTP:`, twilioErr instanceof Error ? twilioErr.message : twilioErr);
         }
         const { code, expiresAt } = await createAndStoreOtp(phone);
         if (process.env.NODE_ENV !== "production") {

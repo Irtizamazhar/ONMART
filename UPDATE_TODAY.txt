@@ -1,0 +1,30 @@
+================================================================================
+                          ONMART - UPDATE / TODAY'S WORK
+                              Tuesday, Feb 24, 2025
+================================================================================
+
+1. REJECTION NOTIFICATION MESSAGE (Email + SMS)
+   --------------------------------------------
+   • File changed: src/lib/notify.ts
+
+   • Jab admin vendor application ko REJECT karta hai, ab vendor ko jo email
+     aur SMS jata hai usme clearly likha jata hai ke "Documents are not correct."
+
+   • SMS text (updated):
+     "Your seller application was rejected. Documents are not correct. Please
+      submit correct documents and apply again. - Onmart"
+
+   • Email subject: "Your seller application was rejected - Onmart"
+
+   • Email body (updated):
+     "Your seller application was rejected.
+      Documents are not correct. Please submit correct documents and apply again.
+      - Onmart"
+
+   • Pehle: Sirf "Please submit clear documents when you apply again" tha.
+   • Ab: "Documents are not correct. Please submit correct documents and apply
+     again" — taake vendor ko reason clear ho ke documents sahi nahi the.
+
+================================================================================
+                              END OF UPDATE
+================================================================================

@@ -45,6 +45,35 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get("email");
   const includeCancelled = searchParams.get("includeCancelled") === "1";
+  const sellerEmail = searchParams.get("sellerEmail")?.trim()?.toLowerCase();
+
+  if (sellerEmail) {
+    const sellerUser = await prisma.user.findUnique({
+      where: { email: sellerEmail, isSeller: true },
+      select: { id: true },
+    }).catch(() => null);
+    if (!sellerUser) return NextResponse.json([], { status: 200 });
+    const productIds = await prisma.product.findMany({
+      where: { vendorId: sellerUser.id },
+      select: { id: true },
+    }).then((rows) => rows.map((r) => r.id));
+    if (productIds.length === 0) return NextResponse.json([], { status: 200 });
+    const orderIds = await prisma.orderItem.findMany({
+      where: { productId: { in: productIds } },
+      select: { orderId: true },
+      distinct: ["orderId"],
+    }).then((rows) => rows.map((r) => r.orderId));
+    if (orderIds.length === 0) return NextResponse.json([], { status: 200 });
+    const where: { id: { in: string[] }; status?: { not: string } } = { id: { in: orderIds } };
+    if (!includeCancelled) where.status = { not: "cancelled" };
+    const orders = await prisma.order.findMany({
+      where,
+      include: { items: true },
+      orderBy: { createdAt: "desc" },
+    });
+    return NextResponse.json(orders.map(orderToJson));
+  }
+
   const where: { email?: string; status?: { not: string } } = {};
   if (email && email.trim()) {
     where.email = email.trim().toLowerCase();

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import LayoutWrapper from "@/components/LayoutWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
+const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-seller" });
 
 export const metadata: Metadata = {
   title: "Onmart – Online Shopping in Pakistan | Fashion, Electronics & Groceries",
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased flex flex-col min-h-screen bg-[var(--background)]`}>
+      <body className={`${inter.className} ${plusJakarta.variable} antialiased flex flex-col min-h-screen bg-[var(--background)]`}>
         <CartProvider>
           <AuthProvider>
             <LanguageProvider>

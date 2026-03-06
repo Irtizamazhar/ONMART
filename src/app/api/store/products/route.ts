@@ -142,9 +142,18 @@ export async function GET(request: NextRequest) {
   }
 
   if (bestSelling) {
-    const whereBest = includeHidden
+    const whereBest: Record<string, unknown> = includeHidden
       ? { soldCount: { gt: 0 } }
       : { hidden: false, soldCount: { gt: 0 } };
+    const sellerEmailForBest = searchParams.get("sellerEmail")?.trim()?.toLowerCase();
+    if (sellerEmailForBest) {
+      const sellerUser = await prisma.user.findUnique({
+        where: { email: sellerEmailForBest, isSeller: true },
+        select: { id: true },
+      }).catch(() => null);
+      if (sellerUser) whereBest.vendorId = sellerUser.id;
+      else return NextResponse.json([], { status: 200 });
+    }
     try {
       const products = await prisma.product.findMany({
         where: whereBest as import("@prisma/client").Prisma.ProductWhereInput,
@@ -191,6 +200,15 @@ export async function GET(request: NextRequest) {
   if (!includeHidden) {
     where.hidden = false;
   }
+  const sellerEmail = searchParams.get("sellerEmail")?.trim()?.toLowerCase();
+  if (sellerEmail) {
+    const sellerUser = await prisma.user.findUnique({
+      where: { email: sellerEmail, isSeller: true },
+      select: { id: true },
+    }).catch(() => null);
+    if (sellerUser) (where as { vendorId: string }).vendorId = sellerUser.id;
+    else return NextResponse.json([], { status: 200 });
+  }
   try {
     const products = await prisma.product.findMany({
       where: where as import("@prisma/client").Prisma.ProductWhereInput,
@@ -234,6 +252,7 @@ export async function POST(request: NextRequest) {
     const inStock = body?.inStock !== undefined ? !!body.inStock : true;
     const originalPriceBody = body?.originalPrice;
     const discountPercentBody = body?.discountPercent;
+    const sellerEmail = body?.sellerEmail != null ? String(body.sellerEmail).trim().toLowerCase() : null;
 
     if (!title) {
       return NextResponse.json({ error: "title and categorySlug required" }, { status: 400 });
@@ -274,6 +293,13 @@ export async function POST(request: NextRequest) {
         titleTranslations: titleTranslationsObj as Prisma.InputJsonValue,
       }),
     };
+    if (sellerEmail) {
+      const sellerUser = await prisma.user.findUnique({
+        where: { email: sellerEmail, isSeller: true },
+        select: { id: true },
+      }).catch(() => null);
+      if (sellerUser) (createData as Record<string, unknown>).vendorId = sellerUser.id;
+    }
     if (originalPriceBody !== undefined && originalPriceBody !== null && originalPriceBody !== "") {
       const numOrig = typeof originalPriceBody === "number" ? originalPriceBody : Number(originalPriceBody);
       if (!Number.isNaN(numOrig) && numOrig >= 0 && numOrig <= 9999999999.99) {

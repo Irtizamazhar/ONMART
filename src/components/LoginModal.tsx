@@ -57,15 +57,15 @@ export default function LoginModal() {
       return;
     }
     setLoading(true);
-    const ok = await login(loginId, password);
+    const result = await login(loginId, password);
     setLoading(false);
-    if (ok) {
+    if (result.ok) {
       closeLoginModal();
       setEmailOrPhone("");
       setPassword("");
       router.refresh();
     } else {
-      setError(t("auth.invalidCredentialsPhone"));
+      setError(result.error || t("auth.invalidCredentialsPhone"));
     }
   };
 

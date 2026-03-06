@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import Logo from "@/components/Logo";
 
 const ORANGE = "#f25a2a";
 
@@ -120,8 +121,22 @@ export default function SignupPage() {
   const loginLink = returnUrl ? `/login?returnUrl=${encodeURIComponent(returnUrl)}` : "/login";
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
-      <div className="max-w-[440px] w-full mx-auto px-4 py-8 flex-1 flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
+      {/* Black header - login jaisa */}
+      <header className="w-full bg-black text-white border-b border-gray-800">
+        <div className="max-w-6xl mx-auto px-4 h-12 sm:h-14 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 shrink-0">
+            <Logo variant="white" className="!text-white" />
+            <span className="font-semibold text-white text-sm sm:text-base">Onmart</span>
+          </Link>
+          <Link href="/" className="text-sm text-white/80 hover:text-white">
+            ← Back to home
+          </Link>
+        </div>
+      </header>
+
+      <div className="flex-1 flex items-center justify-center p-6 sm:p-8 bg-slate-50">
+      <div className="max-w-[440px] w-full mx-auto flex flex-col">
         <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 flex-1">
           <h1 className="text-xl font-bold text-slate-900 border-b border-slate-200 pb-4">Sign up</h1>
 
@@ -270,6 +285,7 @@ export default function SignupPage() {
         <p className="mt-4 text-center">
           <Link href="/" className="text-sm text-slate-500 hover:text-slate-700">← Back to home</Link>
         </p>
+      </div>
       </div>
     </div>
   );

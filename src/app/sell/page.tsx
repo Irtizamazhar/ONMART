@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
+import { useAuth } from "@/context/AuthContext";
 
 const BENEFITS = [
   { key: "sell.benefit1", icon: "%" },
@@ -19,6 +20,7 @@ const STEPS = [
 
 export default function SellPage() {
   const { t } = useLanguage();
+  const { isSeller } = useAuth();
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-orange-50/30">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-10">
@@ -40,6 +42,14 @@ export default function SellPage() {
               {t("sell.beSellerToday")}
               <span className="ml-1">→</span>
             </Link>
+            {isSeller && (
+              <Link
+                href="/sell/dashboard"
+                className="mt-3 inline-flex items-center gap-2 self-start px-5 py-2.5 rounded-xl bg-white/20 text-white font-semibold text-sm border border-white/40 hover:bg-white/30 transition-colors"
+              >
+                Seller Dashboard (upload products)
+              </Link>
+            )}
           </div>
           {/* New Seller Benefits card */}
           <div className="relative sm:w-[320px] md:w-[360px] flex-shrink-0 m-4 sm:m-6 sm:ml-0 bg-white rounded-2xl shadow-xl p-4 sm:p-5 z-10 border border-orange-100">

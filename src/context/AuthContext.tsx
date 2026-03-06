@@ -7,6 +7,7 @@ export interface AuthUser {
   email: string;
   name?: string;
   isAdmin?: boolean;
+  isSeller?: boolean;
 }
 
 interface AuthContextType {
@@ -14,7 +15,8 @@ interface AuthContextType {
   customerUser: AuthUser | null;
   isReady: boolean;
   isAdmin: boolean;
-  login: (email: string, password: string, name?: string) => Promise<boolean>;
+  isSeller: boolean;
+  login: (email: string, password: string, name?: string) => Promise<{ ok: boolean; error?: string }>;
   signup: (email: string, password: string, name?: string) => Promise<boolean>;
   loginWithPhone: (phone: string, name?: string) => boolean;
   loginWithPhoneOtp: (phone: string, code: string, name?: string, password?: string) => Promise<boolean>;
@@ -101,7 +103,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const data = await res.json();
       const u = data.user as AuthUser;
       if (u && typeof u.email === "string") {
-        const customer = { ...u, isAdmin: false };
+        const customer = { ...u, isAdmin: false, isSeller: u.isSeller === true };
         setCustomerUser(customer);
         saveCustomer(customer);
         return true;
@@ -112,28 +114,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return false;
   }, []);
 
-  const login = useCallback(async (email: string, password: string, _name?: string): Promise<boolean> => {
+  const login = useCallback(async (email: string, password: string, _name?: string): Promise<{ ok: boolean; error?: string }> => {
     const trimmed = email.trim();
-    if (!trimmed || !password) return false;
+    if (!trimmed || !password) return { ok: false, error: "Email and password required." };
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: trimmed, password }),
       });
-      if (!res.ok) return false;
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        return { ok: false, error: (data && typeof data.error === "string" ? data.error : null) || "Invalid email or password." };
+      }
       const u = data.user as AuthUser;
       if (u && typeof u.email === "string") {
-        const customer = { ...u, isAdmin: false };
+        const customer = { ...u, isAdmin: false, isSeller: u.isSeller === true };
         setCustomerUser(customer);
         saveCustomer(customer);
-        return true;
+        return { ok: true };
       }
+      return { ok: false, error: "Invalid response from server." };
     } catch {
-      // ignore
+      return { ok: false, error: "Login failed. Try again." };
     }
-    return false;
   }, []);
 
   const loginWithPhone = useCallback((phone: string, name?: string) => {
@@ -188,7 +192,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const data = await res.json();
       const u = data.user as AuthUser;
       if (u && typeof u.email === "string") {
-        const customer = { ...u, isAdmin: false };
+        const customer = { ...u, isAdmin: false, isSeller: u.isSeller === true };
         setCustomerUser(customer);
         saveCustomer(customer);
         return true;
@@ -250,12 +254,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const isAdminRoute = pathname === "/admin" || (pathname && pathname.startsWith("/admin/"));
   const user = isAdminRoute ? adminUser : customerUser;
   const isAdmin = !!adminUser;
+  const isSeller = !!(customerUser && (customerUser as AuthUser & { isSeller?: boolean }).isSeller);
 
   const value: AuthContextType = {
     user,
     customerUser,
     isReady,
     isAdmin,
+    isSeller,
     login,
     signup,
     loginWithPhone,

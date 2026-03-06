@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     if (!file || !file.size) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
-    const allowed = ["products", "banners", "categories"];
+    const allowed = ["products", "banners", "categories", "vendor-cnic", "vendor-store", "vendor-warehouse"];
     if (!allowed.includes(folder)) {
       return NextResponse.json({ error: "Invalid folder" }, { status: 400 });
     }

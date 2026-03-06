@@ -109,9 +109,6 @@ export default function OrdersPage() {
                   {order.status}
                 </span>
               </div>
-              <p className="text-xs text-slate-500 mb-2">
-                Where my product reached: {order.status}
-              </p>
               <ul className="text-slate-700 space-y-1 mb-3">
                 {order.items.map((item, i) => (
                   <li key={i}>

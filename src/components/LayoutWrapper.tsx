@@ -13,7 +13,7 @@ export default function LayoutWrapper({
 }) {
   const pathname = usePathname();
   const isAdminRoute = typeof pathname === "string" && (pathname === "/admin" || pathname.startsWith("/admin/"));
-  const isAuthPage = typeof pathname === "string" && (pathname === "/forgot-password" || pathname === "/reset-password");
+  const isAuthPage = typeof pathname === "string" && (pathname === "/login" || pathname === "/signup" || pathname === "/forgot-password" || pathname === "/reset-password");
   const isSellerApplyPage = typeof pathname === "string" && pathname === "/sell/apply";
 
   if (isAdminRoute || isAuthPage || isSellerApplyPage) {

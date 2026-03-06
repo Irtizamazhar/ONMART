@@ -57,6 +57,9 @@ const config: Config = {
       transitionTimingFunction: {
         smooth: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
+      fontFamily: {
+        seller: ["var(--font-seller)", "system-ui", "sans-serif"],
+      },
     },
   },
   plugins: [],

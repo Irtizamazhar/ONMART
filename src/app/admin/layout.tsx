@@ -107,6 +107,7 @@ export default function AdminLayout({
     { href: "/admin/products", label: "Products" },
     { href: "/admin/upload", label: "Upload Product" },
     { href: "/admin/banners", label: "Banners" },
+    { href: "/admin/vendors", label: "Vendors" },
   ];
 
   return (

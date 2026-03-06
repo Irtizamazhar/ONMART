@@ -5,7 +5,7 @@ import { hashPassword, userToJson } from "@/lib/auth";
 import { normalizePhoneToE164 } from "@/lib/phone";
 
 export async function POST(request: NextRequest) {
-  let body: { phone?: unknown; code?: unknown; name?: unknown; password?: unknown } = {};
+  let body: { phone?: unknown; code?: unknown; name?: unknown; password?: unknown; intent?: unknown } = {};
   try {
     body = await request.json();
   } catch {
@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
   const phone = normalizePhoneToE164(body?.phone);
   const code = typeof body?.code === "string" ? body.code.trim() : "";
   const passwordRaw = typeof body?.password === "string" ? body.password.trim() : null;
+  const intent = body?.intent === "seller_apply" ? "seller_apply" : null;
   if (!phone || code.length < 4) {
     return NextResponse.json({ error: "Phone and code required." }, { status: 400 });
   }
@@ -36,6 +37,11 @@ export async function POST(request: NextRequest) {
           ? "Invalid or expired code. (DEV: use the code shown in the server terminal.)"
           : "Invalid or expired code.";
       return NextResponse.json({ error: msg }, { status: 401 });
+    }
+
+    // Seller apply: only verify, do not create/update user
+    if (intent === "seller_apply") {
+      return NextResponse.json({ verified: true });
     }
 
     const name = typeof body?.name === "string" ? body.name.trim() : null;

@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const intent = body?.intent === "signup" ? "signup" : null;
+  const intent = body?.intent === "signup" ? "signup" : body?.intent === "seller_apply" ? "seller_apply" : null;
   if (intent === "signup") {
     const existing = await prisma.user.findFirst({
       where: { OR: [{ email: normalized }, { phone: normalized }] },
@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Already exist" }, { status: 400 });
     }
   }
+  // seller_apply: no user check; any phone can request OTP
 
   try {
     await prisma.otpVerification.count();

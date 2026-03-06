@@ -1,6 +1,7 @@
 /**
  * Single source of truth for normalizing phone to E.164 for Pakistan.
  * Rules: (1) Start with 0 → exactly 11 digits (03xxxxxxxxx). (2) Start with +92/92 → exactly 12 digits (923001234567).
+ * (3) Exactly 10 digits (3xxxxxxxxx) → treat as Pakistan +92.
  * Returns "" if invalid.
  */
 export function normalizePhoneToE164(value: unknown): string {
@@ -14,6 +15,9 @@ export function normalizePhoneToE164(value: unknown): string {
   if (digits.startsWith("92")) {
     if (digits.length !== 12) return "";
     return "+" + digits;
+  }
+  if (digits.length === 10 && digits.startsWith("3")) {
+    return "+92" + digits;
   }
   return "";
 }
