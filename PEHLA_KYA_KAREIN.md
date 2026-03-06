@@ -1,187 +1,377 @@
-# Pehla kya karein? – Step by step (aram se)
-
-Sirf ek ek step follow karo. Jitna ho gaya utna karo, phir agla step.
+Here is your **complete guide translated into simple English** while keeping the same step-by-step structure.
 
 ---
 
-## Step 1 – MySQL open karo
+# What to do first? – Step by step (easy)
 
-1. Windows pe **Search** kholo (taskbar pe).
-2. Likho: **MySQL 8.0 Command Line Client**
-3. Us app pe **click** karo.
-4. Black window open hogi. Wahan **apna MySQL password** type karo (jab MySQL install kiya tha tab jo password diya tha).  
-   - Agar password nahi rakha tha, seedha **Enter** dabao.
-
-*Yahan pe kuch type nahi dikhega — normal hai, password chup rehta hai. Type karke Enter dabao.*
+Just follow **one step at a time**. Complete one step, then move to the next.
 
 ---
 
-## Step 2 – Database banao
+# Step 1 – Open MySQL
 
-Jo window Step 1 mein open hui thi, usi mein ye line type karo (copy-paste kar sakte ho):
+1. Open **Windows Search** (from the taskbar).
+2. Type: **MySQL 8.0 Command Line Client**
+3. Click on that app.
+4. A **black window** will open. Enter your **MySQL password** (the password you set when installing MySQL).
+
+   * If you didn’t set a password, just press **Enter**.
+
+**Note:** Nothing will appear while typing the password. This is normal because passwords are hidden.
+
+---
+
+# Step 2 – Create the database
+
+In the same window that opened in Step 1, type this line:
 
 ```
 CREATE DATABASE onmart;
 ```
 
-**Enter** dabao. Agar koi error nahi aata, to database ban gaya.
+Press **Enter**.
 
-Phir exit karne ke liye type karo: `exit` → **Enter**. MySQL window band ho jayegi.
+If no error appears, the **database has been created successfully**.
+
+Then exit by typing:
+
+```
+exit
+```
+
+Press **Enter** and the MySQL window will close.
 
 ---
 
-## Step 3 – Project folder kholo aur Terminal kholo *(detail mein)*
+# Step 3 – Open the project folder and open Terminal (detailed)
 
-**Step 3 ka matlab:** Cursor (ya VS Code) mein jahan aapka **onmart** project hai, wahi folder open hona chahiye, aur usi ke andar **Terminal** naam ki cheez kholni hai. Terminal woh jagah hai jahan aap **commands** type karke Enter marte ho — jaise `npx prisma generate`, `npm run dev` wagaira.
+**Meaning of Step 3:**
+In **Cursor or VS Code**, you need to open the **onmart project folder** and open the **Terminal** inside it.
 
-### 3.1 – Project folder open karo
+The **Terminal** is where you type commands like:
 
-1. **Cursor** ya **VS Code** open karo.
-2. **File** menu pe jao → **Open Folder** (ya **Open…**).
-3. **Desktop → New folder (9) → onmart** select karo (jahan `package.json`, `src` folder, `prisma` folder dikh rahe hon).
-4. **Select Folder** / **Open** pe click karo.  
-   Ab left side pe **Explorer** mein aapko **onmart** folder dikhega, uske andar files jaise `package.json`, `src`, `prisma` dikhengi.
+* `npx prisma generate`
+* `npm run dev`
 
-*Samjho: Step 3 ka pehla hissa ye hai ke Cursor mein sahi project folder (onmart) open ho.*
+---
 
-### 3.2 – Terminal kholo
+## Step 3.1 – Open the project folder
 
-**Terminal** = Cursor ke niche ya side mein ek panel jahan **black/blue background** aur **text** dikhta hai; yahan aap type karke commands chalate ho.
+1. Open **Cursor** or **VS Code**.
+2. Click **File** → **Open Folder**.
+3. Select:
 
-**Terminal open karne ke 3 tareeke (koi bhi ek use karo):**
+```
+Desktop → New folder (9) → onmart
+```
 
-**Tareeka A – Shortcut (sabse aasaan)**  
-- Keyboard pe **Ctrl + `** dabao.  
-  (Backtick key ` keyboard pe **1** ke left, **Esc** ke niche hoti hai; kabhi **~** bhi usi pe hota hai.)  
-- Ek naya panel niche ya side open hoga — wahi **Terminal** hai.
+(You should see files like `package.json`, `src`, and `prisma` inside it.)
 
-**Tareeka B – Menu se**  
-- Upar **Terminal** menu pe click karo.  
-- **New Terminal** pe click karo.  
-- Neeche Terminal panel open ho jayega.
+4. Click **Select Folder / Open**.
 
-**Tareeka C – Command Palette se**  
-- **Ctrl + Shift + P** dabao.  
-- Type karo: **Terminal: Create New Terminal**  
-- Enter dabao.
+Now on the **left side (Explorer)** you should see the **onmart** project with files like:
 
-### 3.3 – Terminal sahi jagah pe hai confirm karo
+* package.json
+* src
+* prisma
 
-Terminal mein jab cursor blink kare, to wahan type karo (sirf check ke liye):
+This means the **correct project folder is open**.
+
+---
+
+## Step 3.2 – Open Terminal
+
+**Terminal** is a panel (usually black) where you type commands.
+
+There are **3 ways to open it**:
+
+### Method A – Shortcut (easiest)
+
+Press:
+
+```
+Ctrl + `
+```
+
+(The backtick key ` is below **Esc** and left of **1**.)
+
+A terminal panel will open at the **bottom**.
+
+---
+
+### Method B – From menu
+
+Click:
+
+```
+Terminal → New Terminal
+```
+
+The terminal panel will open.
+
+---
+
+### Method C – Command palette
+
+Press:
+
+```
+Ctrl + Shift + P
+```
+
+Then type:
+
+```
+Terminal: Create New Terminal
+```
+
+Press **Enter**.
+
+---
+
+## Step 3.3 – Confirm terminal is in the correct folder
+
+Inside the terminal, type:
 
 ```
 cd
 ```
 
-Enter dabao. Jo path dikhe (jaise `C:\...\onmart`), usme **onmart** aana chahiye. Agar `onmart` folder ka path dikh raha hai, to sahi jagah pe ho.
+Press **Enter**.
 
-**Step 3 complete:** Ab aapke paas (1) onmart project open hai Cursor mein, aur (2) Terminal bhi open hai. Isi Terminal mein aage ke steps (4 ke baad) ki saari commands chalani hain.
+You should see a path like:
+
+```
+C:\...\onmart
+```
+
+If **onmart** appears in the path, you are in the correct folder.
+
+✅ Step 3 is now complete.
 
 ---
 
-## Step 4 – `.env` file banao
+# Step 4 – Create the `.env` file
 
-**Kyun:** App ko MySQL se connect karne ke liye **password aur database name** chahiye. Ye cheezein `.env` file mein likhi hoti hain taake code mein password dikhai na de.
+**Why:**
+The app needs **database credentials** (password and database name) to connect with MySQL.
 
-**Kya karna hai:**
-
-1. **Left side Explorer** mein **onmart** root folder pe jao (jahan `package.json` dikh raha hai).
-2. **`.env`** naam ki file dekho.  
-   - **Agar dikh rahi hai** → uspe double-click karke kholo.  
-   - **Agar nahi hai** → root folder pe **right-click** → **New File** → naam do: **`.env`** (dot env, bina space).
-3. `.env` file ke andar **sirf ye ek line** likho (apna MySQL password jagah pe):
-
-```
-DATABASE_URL="mysql://root:APNA_PASSWORD@localhost:3306/onmart"
-```
-
-- **APNA_PASSWORD** ki jagah jo MySQL ka password hai woh likho (jis se Step 1 mein login kiya tha).  
-- Agar MySQL ka **password empty** hai to aise likho:  
-  `DATABASE_URL="mysql://root:@localhost:3306/onmart"`
-
-4. **Ctrl + S** dabao taake file save ho jaye.
+These are stored in a **.env file**.
 
 ---
 
-## Step 5 – Prisma se MySQL mein tables banao
+### What to do
 
-**Kyun:** App ko **User**, **Product**, **Order** wagaira ke liye MySQL mein **tables** chahiye. Ye do commands se Prisma automatically wo tables bana deta hai.
+1. In the **Explorer (left side)** go to the **onmart root folder**.
+2. Look for a file named:
 
-**Kya karna hai:** Step 3 wala **Terminal** use karo. Dono commands **ek ek karke** chalao.
+```
+.env
+```
 
-**Pehli command:**
+* If it exists → open it.
+* If not → right-click the root folder → **New File** → name it:
+
+```
+.env
+```
+
+3. Inside the `.env` file write:
+
+```
+DATABASE_URL="mysql://root:YOUR_PASSWORD@localhost:3306/onmart"
+```
+
+Replace **YOUR_PASSWORD** with your MySQL password.
+
+Example if password is empty:
+
+```
+DATABASE_URL="mysql://root:@localhost:3306/onmart"
+```
+
+4. Press:
+
+```
+Ctrl + S
+```
+
+to save the file.
+
+---
+
+# Step 5 – Create tables in MySQL using Prisma
+
+**Why:**
+Your app needs database tables like:
+
+* User
+* Product
+* Order
+* Category
+* Banner
+
+Prisma will create them automatically.
+
+---
+
+### Run these commands in Terminal
+
+Run **one command at a time**.
+
+First command:
 
 ```
 npx prisma generate
 ```
 
-Type karo → **Enter** dabao. Kuch seconds rukho. Jab "Generated Prisma Client" jaisa message aaye, to doosri command chalao.
+Press **Enter**.
 
-**Doosri command:**
+Wait until you see something like:
+
+```
+Generated Prisma Client
+```
+
+Then run the second command:
 
 ```
 npx prisma db push
 ```
 
-Type karo → **Enter** dabao. Isse MySQL ke **onmart** database mein saari tables (User, Category, Product, Order, Banner, etc.) ban jayengi. End mein kuch "Your database is now in sync" jaisa dikh sakta hai.
+Press **Enter**.
+
+This will create all tables inside the **onmart database**.
+
+You may see:
+
+```
+Your database is now in sync
+```
 
 ---
 
-## Step 6 – Admin user banao (seed)
+# Step 6 – Create the admin user (seed)
 
-**Kyun:** `/admin` pe login karne ke liye ek **admin account** chahiye. Ye command ek default admin user MySQL mein bana deti hai.
+**Why:**
+You need an **admin account** to access the **/admin panel**.
 
-**Kya karna hai:** Usi **Terminal** mein ye command chalao:
+Run this command in the same terminal:
 
 ```
 npx prisma db seed
 ```
 
-**Enter** dabao. Agar koi error nahi aata to admin user ban gaya hoga.
+Press **Enter**.
 
-**Admin login details (yaad rakhna):**
-- **Email:** admin@onmart.com  
-- **Password:** admin123  
+If no error appears, the **admin user is created**.
 
-Baad mein **/admin** pe jaakar isi se login karna hai.
+### Admin login details
+
+Email:
+
+```
+admin@onmart.com
+```
+
+Password:
+
+```
+admin123
+```
+
+Use this later to log in to **/admin**.
 
 ---
 
-## Step 7 – App chalao
+# Step 7 – Run the application
 
-**Kya karna hai:** Usi **Terminal** mein ye command chalao:
+In the terminal run:
 
 ```
 npm run dev
 ```
 
-**Enter** dabao. Thodi der baad terminal mein kuch aisa dikhega: **"Ready on http://localhost:3000"** ya **"Local: http://localhost:3000"**.
+Press **Enter**.
 
-**Ab browser mein jao:**  
-- Chrome/Edge kholo.  
-- Address bar mein likho: **http://localhost:3000**  
-- Enter dabao.
+After a few seconds you will see something like:
 
-**Ab aap kar sakte ho:**
-- **User:** Sign up / Login se account banao — sab MySQL mein save hoga.  
-- **Admin:** Browser mein **http://localhost:3000/admin** likho → **admin@onmart.com** / **admin123** se login karo.
+```
+Ready on http://localhost:3000
+```
 
-App band karne ke liye Terminal mein **Ctrl + C** dabao.
+or
 
----
-
-## Short summary – order yaad rakhne ke liye
-
-| Step | Kya karna hai |
-|------|----------------|
-| 1 | MySQL 8.0 Command Line Client open karo, password do |
-| 2 | `CREATE DATABASE onmart;` chalao, phir `exit` |
-| 3 | Cursor mein onmart folder open karo, **Terminal** kholo (Ctrl + `) |
-| 4 | `.env` file banao, `DATABASE_URL` likho (apna MySQL password ke sath) |
-| 5 | `npx prisma generate` phir `npx prisma db push` |
-| 6 | `npx prisma db seed` (admin user) |
-| 7 | `npm run dev` → browser mein **http://localhost:3000** |
+```
+Local: http://localhost:3000
+```
 
 ---
 
-Agar kisi step pe **error** aaye to us step ka **poora error message** copy karke bata dena, theek karke bata denge. Ek step khatam karo, phir agla — aram se karo.
+### Open the website
+
+Open **Chrome or Edge** and go to:
+
+```
+http://localhost:3000
+```
+
+---
+
+### Now you can use the app
+
+**User side**
+
+* Sign up
+* Login
+* Data will be stored in MySQL
+
+**Admin side**
+
+Open:
+
+```
+http://localhost:3000/admin
+```
+
+Login using:
+
+Email:
+
+```
+admin@onmart.com
+```
+
+Password:
+
+```
+admin123
+```
+
+---
+
+### Stop the app
+
+In the terminal press:
+
+```
+Ctrl + C
+```
+
+---
+
+# Short summary (to remember the order)
+
+| Step | What to do                                                                    |
+| ---- | ----------------------------------------------------------------------------- |
+| 1    | Open MySQL Command Line Client                                                |
+| 2    | Run `CREATE DATABASE onmart;` then `exit`                                     |
+| 3    | Open **onmart** folder in Cursor / VS Code and open Terminal                  |
+| 4    | Create `.env` file and add `DATABASE_URL`                                     |
+| 5    | Run `npx prisma generate` then `npx prisma db push`                           |
+| 6    | Run `npx prisma db seed` (creates admin user)                                 |
+| 7    | Run `npm run dev` and open **[http://localhost:3000](http://localhost:3000)** |
+
+---
+
+
